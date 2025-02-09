@@ -35,26 +35,26 @@ This repository documents my journey in setting up a SOC (Security Operations Ce
 ### Network Topology
 
 ```
-    +-------------------+          +-----------------------+          +-------------------+
-    | Windows Server 22 |          | Windows 10 (VM)       |          | Windows 10 (VM)   |
-    | 192.168.0.150     |<-------->| 192.168.0.130         |<-------->| 192.168.0.120     |
-    +-------------------+          +-----------------------+          +-------------------+
-                                              ^
-                                              |
-                                              v
-                               +--------------------------------+
-                               |  Windows 11 (Splunk Enterprise)|
-                               |  192.168.0.196 (Receiver)      |
-                               +--------------------------------+
-                                              ^
-                                              |
-                                              |
-                                              v
-                                    +------------------+
-                                    | Windows 10       |
-                                    | 192.168.0.131    |
-                                    +------------------+
-               (All forward logs to the Windows 11 machine running Splunk)
+    +---------------------+          +-----------------------+          +-------------------+
+    | Windows Server 22 vm|          | Kali Linux (VM)       |          | Windows 10 (VM)   |
+    | 192.168.0.150       |<-------->| 192.168.0.130         |<-------->| 192.168.0.120     |
+    +---------------------+          +-----------------------+          +-------------------+
+                                                ^
+                                                |
+                                                v
+                                 +--------------------------------+
+                                 |  Windows 11 (Splunk Enterprise)|
+                                 |  192.168.0.196 (Receiver)      |
+                                 +--------------------------------+
+                                                ^
+                                                |
+                                                |
+                                                v
+                                      +------------------+
+                                      | Windows 10       |
+                                      | 192.168.0.131    |
+                                      +------------------+
+                   (All forward logs to the Windows 11 machine running Splunk)
 
 ```
 
@@ -64,7 +64,7 @@ This repository documents my journey in setting up a SOC (Security Operations Ce
 | **Windows 11** | Splunk Enterprise (Log Receiver), physical computer | 192.168.0.196 | - |
 | **Windows Server 22 VM** | Log Source | 192.168.0.150 | Bridged |
 | **Windows 10 VM** | Log Source | 192.168.0.120 | Bridged |
-| **Windows 10 VM** | Log Source | 192.168.0.130 | Bridged |
+| **Kali Linux VM** | Log Source | 192.168.0.130 | Bridged |
 | **Windows 10** | Log Source, physical computer | 192.168.0.131 | - |
 
 
@@ -93,8 +93,9 @@ All machines are forwarding logs to the Windows 11 machine running Splunk Enterp
     - Set each VM to **Bridged Adapter** so that they get IPs on the same subnet (192.168.0.x).
 4. **Assign Static IP Addresses**:
     - Windows Server 22: 192.168.0.150
-    - Windows 10 VM(s): 192.168.0.120, 192.168.0.130
-    - Windows 10 Laptop (physical): 192.168.0.131
+    - Windows 10 VM(s): 192.168.0.120
+    - Kali Linux: 192.168.0.130
+    - Windows 10: 192.168.0.131
 
 ![Win-10-Net-Setting](https://github.com/user-attachments/assets/9e46f33a-d15d-42ec-b4f9-ba493f48073b)
 
